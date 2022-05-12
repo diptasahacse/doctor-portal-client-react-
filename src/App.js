@@ -1,9 +1,10 @@
 import './App.css';
+import Header from './Pages/shared/Header/Header';
 
 function App() {
   return (
     <div>
-      <button className="btn btn-primary">Button</button>
+      <Header></Header>
 
     </div>
   );
