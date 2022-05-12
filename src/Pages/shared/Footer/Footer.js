@@ -2,7 +2,7 @@ import React from 'react';
 import footer from '../../../assets/images/footer.png'
 const Footer = () => {
     return (
-        <div style={{ backgroundImage: `url(${footer})` }}>
+        <div style={{ backgroundImage: `url(${footer})`, backgroundSize: "cover",backgroundPosition: "right" }}>
             <footer className="footer p-10 text-base-content">
                 <div>
                     <span className="footer-title">Services</span>
@@ -27,7 +27,7 @@ const Footer = () => {
             </footer>
             <footer className="footer px-10 py-4 border-t text-base-content border-base-300">
                 <div className="items-center grid-flow-col">
-                    
+
                     <p>Copyright &copy; Dipta Saha.</p>
                 </div>
                 <div className="md:place-self-center md:justify-self-end">
