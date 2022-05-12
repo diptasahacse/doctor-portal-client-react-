@@ -3,19 +3,19 @@ import React from 'react';
 const TestimonialCard = ({ single }) => {
     const { name, image, des, from } = single;
     return (
-        <div class="card bg-base-100 shadow-xl">
-            <div class="card-body">
+        <div className="card bg-base-100 shadow-xl">
+            <div className="card-body">
                 <p>{des}</p>
 
 
                 <div className='flex mt-5 items-center'>
-                    <div class="avatar">
-                        <div class="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                            <img src="https://api.lorem.space/image/face?hash=3174" />
+                    <div className="avatar">
+                        <div className="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                            <img src={image} alt='' />
                         </div>
                     </div>
                     <div className='ml-4'>
-                        <h2 class="card-title">{name}</h2>
+                        <h2 className="card-title">{name}</h2>
                         <p>{from}</p>
 
                     </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import AppointmentSection from './AppointmentSection/AppointmentSection';
 import Banner from './Banner/Banner';
 import ExceptionalDentalSection from './ExceptionalDentalSection/ExceptionalDentalSection';
+import FormSection from './FormSection/FormSection';
 import InfoSection from './InfoSection/InfoSection';
 import ServiceSection from './ServiceSection/ServiceSection';
 import Testimonials from './Testimonials/Testimonials';
@@ -18,8 +19,8 @@ const Home = () => {
             <AppointmentSection></AppointmentSection>
             <div className='px-12 '>
                 <Testimonials></Testimonials>
-
             </div>
+            <FormSection></FormSection>
 
         </div>
 
