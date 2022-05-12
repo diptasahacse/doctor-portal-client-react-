@@ -4,7 +4,7 @@ import PrimaryButton from '../../shared/PrimaryButton/PrimaryButton';
 
 const ExceptionalDentalSection = () => {
     return (
-        <div className="hero min-h-screen py-12">
+        <div className="hero min-h-screen py-12 pb-0">
             <div className="hero-content flex-col gap-20 lg:flex-row">
                 <img src={treatment} className="max-w-sm rounded-lg shadow-2xl" />
                 <div>

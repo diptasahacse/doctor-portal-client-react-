@@ -7,13 +7,18 @@ import ServiceSection from './ServiceSection/ServiceSection';
 
 const Home = () => {
     return (
-        <div className='px-12 '>
-            <Banner></Banner>
-            <InfoSection></InfoSection>
-            <ServiceSection></ServiceSection>
-            <ExceptionalDentalSection></ExceptionalDentalSection>
+        <div>
+            <div className='px-12 '>
+                <Banner></Banner>
+                <InfoSection></InfoSection>
+                <ServiceSection></ServiceSection>
+                <ExceptionalDentalSection></ExceptionalDentalSection>
+
+            </div>
             <AppointmentSection></AppointmentSection>
+
         </div>
+
     );
 };
 
