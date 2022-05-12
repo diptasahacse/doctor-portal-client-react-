@@ -10,14 +10,14 @@ import Testimonials from './Testimonials/Testimonials';
 const Home = () => {
     return (
         <div>
-            <div className='px-12 '>
+            <div>
                 <Banner></Banner>
                 <InfoSection></InfoSection>
                 <ServiceSection></ServiceSection>
                 <ExceptionalDentalSection></ExceptionalDentalSection>
             </div>
             <AppointmentSection></AppointmentSection>
-            <div className='px-12 '>
+            <div>
                 <Testimonials></Testimonials>
             </div>
             <FormSection></FormSection>

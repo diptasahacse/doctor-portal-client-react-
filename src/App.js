@@ -11,7 +11,7 @@ import Header from './Pages/shared/Header/Header';
 
 function App() {
   return (
-    <div>
+    <div className='max-w-7xl mx-auto'>
       <Header></Header>
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
