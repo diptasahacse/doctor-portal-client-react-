@@ -4,6 +4,7 @@ import Banner from './Banner/Banner';
 import ExceptionalDentalSection from './ExceptionalDentalSection/ExceptionalDentalSection';
 import InfoSection from './InfoSection/InfoSection';
 import ServiceSection from './ServiceSection/ServiceSection';
+import Testimonials from './Testimonials/Testimonials';
 
 const Home = () => {
     return (
@@ -13,9 +14,12 @@ const Home = () => {
                 <InfoSection></InfoSection>
                 <ServiceSection></ServiceSection>
                 <ExceptionalDentalSection></ExceptionalDentalSection>
-
             </div>
             <AppointmentSection></AppointmentSection>
+            <div className='px-12 '>
+                <Testimonials></Testimonials>
+
+            </div>
 
         </div>
 
