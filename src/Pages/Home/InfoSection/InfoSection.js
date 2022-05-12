@@ -23,7 +23,7 @@ const InfoSection = () => {
         }
     ]
     return (
-        <div className='px-12 py-12'>
+        <div className='py-12'>
             <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
                 {
                     infoData.map((info,index) => <InfoCard key={index} info={info} index={index+1}></InfoCard>)

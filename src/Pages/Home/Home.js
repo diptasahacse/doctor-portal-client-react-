@@ -5,7 +5,7 @@ import ServiceSection from './ServiceSection/ServiceSection';
 
 const Home = () => {
     return (
-        <div>
+        <div className='px-12 '>
             <Banner></Banner>
             <InfoSection></InfoSection>
             <ServiceSection></ServiceSection>

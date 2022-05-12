@@ -3,13 +3,12 @@ import React from 'react';
 const ServiceCard = ({ service }) => {
     const { title, des, logo } = service;
     return (
-        <div className="card w-96 bg-base-100 shadow-xl">
+        <div className="card bg-base-100 shadow-xl">
+            <figure  className='mt-10 ml-0 lg:ml-10'><img src={logo} alt="Album" /></figure>
             <div className="card-body">
-                <h2 className="card-title">Card title!</h2>
-                <p>If a dog chews shoes whose shoes does he choose?</p>
-                <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Buy Now</button>
-                </div>
+                <h2 className="card-title">{title}</h2>
+                <p>{des}</p>
+                
             </div>
         </div>
     );

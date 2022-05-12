@@ -26,7 +26,7 @@ const ServiceSection = () => {
     return (
         <div className='py-12'>
             <SectionTitle title='our services' subTitle='Service we Provide' align='text-center'></SectionTitle>
-            <div className='grid grid-cols-1 lg:grid-cols-3 gap-4'>
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
                 {
                     serviceData.map((service, index) => <ServiceCard key={index} service={service}></ServiceCard>)
 
