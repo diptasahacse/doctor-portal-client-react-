@@ -17,7 +17,7 @@ const AvailableServices = ({ selectedDate }) => {
     }
     return (
         <div>
-            <h3 className='text-center text-primary font-semibold text-xl'>Available Services on  {format(selectedDate, 'PP')}</h3>
+            <h3 className='text-center text-secondary font-semibold text-xl'>Available Services on  {format(selectedDate, 'PP')}</h3>
 
             <div className='grid my-10 grid-cols-3 gap-5'>
                 {
