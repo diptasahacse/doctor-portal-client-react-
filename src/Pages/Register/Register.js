@@ -27,13 +27,13 @@ const Register = () => {
         return <Loading></Loading>
     }
 
-    // console.log(user)
+    console.log(user)
 
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         const displayName = data.name;
-        createUserWithEmailAndPassword(data.email, data.password)
-        // await updateProfile({ displayName })
+        await createUserWithEmailAndPassword(data.email, data.password)
+        await updateProfile({ displayName })
 
 
 
