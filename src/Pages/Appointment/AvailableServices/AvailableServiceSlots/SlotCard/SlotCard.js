@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SlotCard = ({ name, slot }) => {
+const SlotCard = ({ name, slot, selectServiceHandler }) => {
     return (
         // <div>
         //     <h3>{name}</h3>
@@ -13,7 +13,7 @@ const SlotCard = ({ name, slot }) => {
                 <h2 className="card-title text-secondary flex justify-center">{name}</h2>
                 <p className='flex justify-center'>{slot}</p>
                 <div className="card-actions justify-center">
-                    <button className="btn btn-primary text-white mt-4">Book Appointment</button>
+                    <label onClick={() => { selectServiceHandler(name, slot) }} for="service-modal" class="modal-button btn btn-primary text-white mt-4">Book Appointment</label>
                 </div>
             </div>
         </div>

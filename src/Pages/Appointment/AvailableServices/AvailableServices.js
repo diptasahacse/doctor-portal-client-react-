@@ -24,9 +24,11 @@ const AvailableServices = ({ selectedDate }) => {
                     services.map(service => <ServiceNameCard onServiceChangeListener={onServiceChangeListener} key={service._id} service={service}></ServiceNameCard>)
                 }
             </div>
-            {
-                Object.keys(selectedServiceObj).length > 0 && <AvailableServiceSlots selectedServiceObj={selectedServiceObj}></AvailableServiceSlots>
-            }
+            <div>
+                {
+                    Object.keys(selectedServiceObj).length > 0 && <AvailableServiceSlots selectedDate={selectedDate} selectedServiceObj={selectedServiceObj}></AvailableServiceSlots>
+                }
+            </div>
 
         </div>
     );
