@@ -1,13 +1,15 @@
 import React from 'react';
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth'
+import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth'
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
 import Loading from '../shared/Loading/Loading';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Register = () => {
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
-
+    const [sendEmailVerification, sending, verifivationError] = useSendEmailVerification(auth);
     let signUpError;
     const [
         createUserWithEmailAndPassword,
@@ -17,12 +19,12 @@ const Register = () => {
     ] = useCreateUserWithEmailAndPassword(auth);
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
     // For Error
-    if (gError || error || updateError) {
-        signUpError = <p className='text-red-500 mb-4'>{gError?.message || error?.message || updateError?.message}</p>
+    if (gError || error || updateError || verifivationError) {
+        signUpError = <p className='text-red-500 mb-4'>{gError?.message || error?.message || updateError?.message || verifivationError?.message}</p>
 
     }
     // For Loading
-    if (gLoading || loading || updating) {
+    if (gLoading || loading || updating || sending) {
 
         return <Loading></Loading>
     }
@@ -34,6 +36,8 @@ const Register = () => {
         const displayName = data.name;
         await createUserWithEmailAndPassword(data.email, data.password)
         await updateProfile({ displayName })
+        await sendEmailVerification();
+        toast("Verification link sent your email");
 
 
 
@@ -136,7 +140,7 @@ const Register = () => {
                     </div>
                     <div className="divider">OR</div>
                     <button onClick={() => signInWithGoogle()} className="btn btn-outline btn-accent">Continue with google</button>
-
+                    <ToastContainer />
                 </div>
             </div>
         </div>
