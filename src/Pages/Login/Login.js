@@ -2,14 +2,17 @@ import React from 'react';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth'
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../shared/Loading/Loading';
 
 const Login = () => {
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
     const navigate = useNavigate()
+
+    let location = useLocation();
     let signInError;
+    let from = location.state?.from?.pathname || "/";
     const [
         signInWithEmailAndPassword,
         user,
@@ -33,7 +36,7 @@ const Login = () => {
     if (user) {
         // if email is verified
         if (user.user.emailVerified) {
-            navigate('/appointment')
+            navigate(from, { replace: true });
         }
         else {
             signInError = <p className='text-red-500 mb-4'>Email is not verified.. please verify it</p>
