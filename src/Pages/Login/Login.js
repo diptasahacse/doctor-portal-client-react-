@@ -1,17 +1,41 @@
 import React from 'react';
-import { useSignInWithGoogle } from 'react-firebase-hooks/auth'
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth'
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
+import { Link } from 'react-router-dom';
 
 const Login = () => {
-    const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
-    if (user) {
-        console.log(user)
+
+    let signInError;
+    const [
+        signInWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useSignInWithEmailAndPassword(auth);
+    // For Error
+    if (gError || error) {
+        signInError = <p className='text-red-500 mb-4'>{gError?.message || error?.message}</p>
+
+    }
+    // For Loading
+    if (gLoading || loading) {
+
+        return <div className='flex justify-center'><button class="btn btn-square loading"></button></div>
+    }
+
+
+
+    // For User
+    if (gUser) {
+        console.log(gUser)
     }
 
 
     const onSubmit = data => {
+        signInWithEmailAndPassword(data.email, data.password)
 
         console.log(data)
     };
@@ -77,9 +101,12 @@ const Login = () => {
                                     {errors.password?.type === 'minLength' && <span className="label-text-alt text-red-600">{errors.password.message}</span>}
                                 </label>
                             </div>
-
+                            {
+                                signInError && signInError
+                            }
                             <input className='btn w-full max-w-xs' type="submit" value='Login' />
                         </form>
+                        <p className='text-center mt-2'><small>New to doctor's portal..? <Link className='text-primary' to='/register'>Register</Link> </small></p>
                     </div>
                     <div className="divider">OR</div>
                     <button onClick={() => signInWithGoogle()} className="btn btn-outline btn-accent">Continue with google</button>
