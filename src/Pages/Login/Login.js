@@ -31,16 +31,24 @@ const Login = () => {
     }
 
 
+    console.log(gError)
 
     // For email User
-    if (user) {
+    if (user || gUser) {
         // if email is verified
-        if (user.user.emailVerified) {
-            navigate(from, { replace: true });
+        if (user) {
+            if (user.user.emailVerified) {
+                navigate(from, { replace: true });
+            }
+            else {
+                signInError = <p className='text-red-500 mb-4'>Email is not verified.. please verify it</p>
+            }
+
         }
         else {
-            signInError = <p className='text-red-500 mb-4'>Email is not verified.. please verify it</p>
+            navigate(from, { replace: true });
         }
+
     }
 
 
