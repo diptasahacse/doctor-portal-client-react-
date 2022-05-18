@@ -12,7 +12,7 @@ const Header = () => {
         <li> <Link to='/appointment'>Appointment</Link> </li>
         <li> <Link to='/reviews'>Review</Link> </li>
         <li> <Link to='/contact'>Contact Us</Link> </li>
-        <li> {user ? <button onClick={() => signOut(auth)} class="btn btn-active btn-ghost">Sign out</button> : <Link to='/login'>Login</Link>} </li>
+        <li> {user ? <button onClick={() => signOut(auth)} className="btn btn-active btn-ghost">Sign out</button> : <Link to='/login'>Login</Link>} </li>
     </>
     return (
         <div className="navbar bg-base-100">

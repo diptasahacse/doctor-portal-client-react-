@@ -31,7 +31,7 @@ const Login = () => {
     }
 
 
-    console.log(gError)
+    // console.log(gError)
 
     // For email and google User
     if (user || gUser) {
