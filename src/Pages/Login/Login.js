@@ -33,10 +33,11 @@ const Login = () => {
 
     console.log(gError)
 
-    // For email User
+    // For email and google User
     if (user || gUser) {
         // if email is verified
         if (user) {
+            // if he login with email 
             if (user.user.emailVerified) {
                 navigate(from, { replace: true });
             }
@@ -46,6 +47,7 @@ const Login = () => {
 
         }
         else {
+            // if he login with google 
             navigate(from, { replace: true });
         }
 

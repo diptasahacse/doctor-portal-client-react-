@@ -2,22 +2,30 @@ import React from 'react';
 import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth'
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../shared/Loading/Loading';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const Register = () => {
+    // Initialize
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [sendEmailVerification, sending, verifivationError] = useSendEmailVerification(auth);
+    const navigate = useNavigate();
+    let location = useLocation();
+    let from = location.state?.from?.pathname || "/";
     let signUpError;
     const [
         createUserWithEmailAndPassword,
-        user,
         loading,
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
+
+
+
+
     // For Error
     if (gError || error || updateError || verifivationError) {
         signUpError = <p className='text-red-500 mb-4'>{gError?.message || error?.message || updateError?.message || verifivationError?.message}</p>
@@ -28,8 +36,12 @@ const Register = () => {
 
         return <Loading></Loading>
     }
+    // For google user
+    if (gUser) {
+        navigate(from, { replace: true });
+    }
 
-    console.log(user)
+    // console.log(user)
 
 
     const onSubmit = async (data) => {
