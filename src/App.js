@@ -12,7 +12,8 @@ import Footer from './Pages/shared/Footer/Footer';
 import Header from './Pages/shared/Header/Header';
 import NotFound from './Pages/shared/NotFound/NotFound';
 import RequireAuth from './Pages/shared/RequireAuth/RequireAuth';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <div className='max-w-7xl mx-auto'>
@@ -34,6 +35,7 @@ function App() {
         <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>
       <Footer></Footer>
+      <ToastContainer />
 
     </div>
   );

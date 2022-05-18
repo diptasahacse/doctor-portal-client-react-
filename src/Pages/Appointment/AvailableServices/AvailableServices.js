@@ -8,6 +8,7 @@ const AvailableServices = ({ selectedDate }) => {
     const [services, setServices] = useServices()
     const [selectedServiceObj, setSelectedServiceObj] = useState({})
 
+    // console.log(selectedServiceObj)
     // console.log(services)
     const onServiceChangeListener = (serviceId) => {
 
