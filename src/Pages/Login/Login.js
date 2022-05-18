@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth'
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
@@ -19,6 +19,31 @@ const Login = () => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+
+
+    useEffect(() => {
+        // For email and google User
+        if (user || gUser) {
+            // if email is verified
+            if (user) {
+                // if he login with email 
+                if (user.user.emailVerified) {
+                    navigate(from, { replace: true });
+                }
+                else {
+                    signInError = <p className='text-red-500 mb-4'>Email is not verified.. please verify it</p>
+                }
+
+            }
+            else {
+                // if he login with google 
+                navigate(from, { replace: true });
+            }
+
+        }
+    }, [user, gUser, from, navigate])
+
+
     // For Error
     if (gError || error) {
         signInError = <p className='text-red-500 mb-4'>{gError?.message || error?.message}</p>
@@ -33,25 +58,7 @@ const Login = () => {
 
     // console.log(gError)
 
-    // For email and google User
-    if (user || gUser) {
-        // if email is verified
-        if (user) {
-            // if he login with email 
-            if (user.user.emailVerified) {
-                navigate(from, { replace: true });
-            }
-            else {
-                signInError = <p className='text-red-500 mb-4'>Email is not verified.. please verify it</p>
-            }
 
-        }
-        else {
-            // if he login with google 
-            navigate(from, { replace: true });
-        }
-
-    }
 
 
     const onSubmit = data => {

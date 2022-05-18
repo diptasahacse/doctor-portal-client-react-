@@ -13,7 +13,7 @@ const SlotCard = ({ name, slot, selectServiceHandler }) => {
                 <h2 className="card-title text-secondary flex justify-center">{name}</h2>
                 <p className='flex justify-center'>{slot}</p>
                 <div className="card-actions justify-center">
-                    <label onClick={() => { selectServiceHandler(name, slot) }} for="service-modal" className="modal-button btn btn-primary text-white mt-4">Book Appointment</label>
+                    <label onClick={() => { selectServiceHandler(name, slot) }} htmlFor="service-modal" className="modal-button btn btn-primary text-white mt-4">Book Appointment</label>
                 </div>
             </div>
         </div>

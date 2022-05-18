@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth'
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
@@ -22,6 +22,12 @@ const Register = () => {
     ] = useCreateUserWithEmailAndPassword(auth);
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
+    useEffect(() => {
+        // For google user
+        if (gUser) {
+            navigate(from, { replace: true });
+        }
+    }, [gUser, from, navigate])
 
 
 
@@ -36,10 +42,7 @@ const Register = () => {
 
         return <Loading></Loading>
     }
-    // For google user
-    if (gUser) {
-        navigate(from, { replace: true });
-    }
+
 
     // console.log(user)
 
