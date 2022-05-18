@@ -128,6 +128,9 @@ const Login = () => {
                                     {errors.password?.type === 'minLength' && <span className="label-text-alt text-red-600">{errors.password.message}</span>}
                                 </label>
                             </div>
+                            <div className='mb-2'>
+                                <Link to='/resetpassword' className='link text-red-500'>Forgot Password..?</Link>
+                            </div>
                             {
                                 signInError && signInError
                             }

@@ -6,6 +6,7 @@ import ContactUs from './Pages/ContactUs/ContactUs';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
 import Register from './Pages/Register/Register';
+import ResetPassword from './Pages/ResetPassword/ResetPassword';
 import Reviews from './Pages/Reviews/Reviews';
 import Footer from './Pages/shared/Footer/Footer';
 import Header from './Pages/shared/Header/Header';
@@ -29,6 +30,7 @@ function App() {
         <Route path='/contact' element={<ContactUs></ContactUs>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>
+        <Route path='/resetpassword' element={<ResetPassword></ResetPassword>}></Route>
         <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>
       <Footer></Footer>
