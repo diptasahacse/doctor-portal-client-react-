@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../../../firebase.init';
 import ServiceModal from '../ServiceModal/ServiceModal';
 import SlotCard from './SlotCard/SlotCard';
 
 const AvailableServiceSlots = ({ selectedServiceObj, selectedDate }) => {
-
+    const [user, loading, error] = useAuthState(auth);
     const { name, slots } = selectedServiceObj;
     const [selectedTreatment, setSelectedTreatment] = useState({})
     const selectServiceHandler = (name, slot) => {
@@ -24,7 +26,7 @@ const AvailableServiceSlots = ({ selectedServiceObj, selectedDate }) => {
                 : <p className='text-center mt-3 text-red-600'>Slot is not available</p>
             }
             {
-                Object.keys(selectedTreatment).length > 0 && <ServiceModal selectedTreatment={selectedTreatment}></ServiceModal>
+                Object.keys(selectedTreatment).length > 0 && <ServiceModal user={user} selectedTreatment={selectedTreatment}></ServiceModal>
             }
 
 
