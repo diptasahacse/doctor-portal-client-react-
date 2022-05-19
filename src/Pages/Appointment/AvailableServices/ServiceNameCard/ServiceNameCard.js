@@ -7,7 +7,7 @@ const ServiceNameCard = ({ service, onServiceChangeListener }) => {
         <div onClick={() => onServiceChangeListener(_id)} className="card cursor-pointer shadow hover:shadow-lg">
             <div className="card-body">
                 <h2 className="card-title text-secondary flex justify-center">{name}</h2>
-                <p className='flex justify-center'>{slots.length} Slots</p>
+                <p className='flex text-primary text-lg font-medium justify-center'>{slots.length} Slots</p>
             </div>
         </div>
     );
