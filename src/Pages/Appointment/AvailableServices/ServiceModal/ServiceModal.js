@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 import React, { useRef } from 'react';
 import { toast } from 'react-toastify';
 
-const ServiceModal = ({ selectedTreatment, user, setSelectedTreatment }) => {
+const ServiceModal = ({ selectedTreatment, user, setSelectedTreatment, refetch }) => {
     const { displayName, email } = user
     const { _id, name, slot, selectedDate } = selectedTreatment;
 
@@ -41,6 +41,7 @@ const ServiceModal = ({ selectedTreatment, user, setSelectedTreatment }) => {
                 if (data.success) {
                     toast('Appointment Successfully stored..')
                     setSelectedTreatment({})
+                    refetch()
 
                 }
                 else {

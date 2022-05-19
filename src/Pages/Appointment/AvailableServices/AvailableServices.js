@@ -1,12 +1,26 @@
 import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
-import useServices from '../../../hooks/useServices';
+import { useQuery } from 'react-query';
+import Loading from '../../shared/Loading/Loading';
 import AvailableServiceSlots from './AvailableServiceSlots/AvailableServiceSlots';
 import ServiceNameCard from './ServiceNameCard/ServiceNameCard';
 
 const AvailableServices = ({ selectedDate }) => {
-    const [services, setServices] = useServices(selectedDate)
     const [selectedServiceObj, setSelectedServiceObj] = useState({})
+
+    const formatedDate = format(selectedDate, 'PP');
+
+    const { isLoading, error, data: services, refetch } = useQuery(['available', formatedDate], () => fetch(`http://localhost:5000/available?date=${formatedDate}`)
+        .then(res => res.json()))
+
+    if (isLoading) {
+        return <Loading></Loading>
+
+    }
+
+
+
+
 
     // console.log(selectedServiceObj)
     // console.log(services)
@@ -27,7 +41,7 @@ const AvailableServices = ({ selectedDate }) => {
             </div>
             <div>
                 {
-                    Object.keys(selectedServiceObj).length > 0 && <AvailableServiceSlots selectedDate={selectedDate} selectedServiceObj={selectedServiceObj}></AvailableServiceSlots>
+                    Object.keys(selectedServiceObj).length > 0 && <AvailableServiceSlots refetch={refetch} selectedDate={selectedDate} selectedServiceObj={selectedServiceObj}></AvailableServiceSlots>
                 }
             </div>
 
