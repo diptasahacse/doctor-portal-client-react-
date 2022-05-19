@@ -41,7 +41,8 @@ const ServiceModal = ({ selectedTreatment, user, setSelectedTreatment, refetch }
                 if (data.success) {
                     toast('Appointment Successfully stored..')
                     setSelectedTreatment({})
-                    refetch()
+                    refetch();
+                    
 
                 }
                 else {

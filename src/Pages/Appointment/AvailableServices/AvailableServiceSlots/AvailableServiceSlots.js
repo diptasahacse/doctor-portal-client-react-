@@ -4,7 +4,7 @@ import auth from '../../../../firebase.init';
 import ServiceModal from '../ServiceModal/ServiceModal';
 import SlotCard from './SlotCard/SlotCard';
 
-const AvailableServiceSlots = ({ selectedServiceObj, selectedDate, refetch }) => {
+const AvailableServiceSlots = ({ selectedServiceObj, selectedDate, refetch}) => {
     const [user, loading, error] = useAuthState(auth);
     const { _id, name, slots } = selectedServiceObj;
     const [selectedTreatment, setSelectedTreatment] = useState({})
