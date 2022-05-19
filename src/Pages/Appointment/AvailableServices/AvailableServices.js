@@ -5,7 +5,7 @@ import AvailableServiceSlots from './AvailableServiceSlots/AvailableServiceSlots
 import ServiceNameCard from './ServiceNameCard/ServiceNameCard';
 
 const AvailableServices = ({ selectedDate }) => {
-    const [services, setServices] = useServices()
+    const [services, setServices] = useServices(selectedDate)
     const [selectedServiceObj, setSelectedServiceObj] = useState({})
 
     // console.log(selectedServiceObj)

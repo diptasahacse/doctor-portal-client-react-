@@ -1,5 +1,4 @@
 import React from 'react';
-import useServices from '../../../../hooks/useServices';
 
 const ServiceNameCard = ({ service, onServiceChangeListener }) => {
     return (
