@@ -8,7 +8,7 @@ const useServices = (date) => {
         fetch(`http://localhost:5000/available?date=${formatedDate}`)
             .then(res => res.json())
             .then(data => setServices(data))
-    }, [])
+    }, [formatedDate])
 
 
     return [services, setServices];

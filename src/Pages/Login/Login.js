@@ -64,7 +64,7 @@ const Login = () => {
     const onSubmit = data => {
         signInWithEmailAndPassword(data.email, data.password)
 
-        console.log(data)
+        // console.log(data)
     };
     return (
         <div className='flex justify-center items-center h-screen'>
