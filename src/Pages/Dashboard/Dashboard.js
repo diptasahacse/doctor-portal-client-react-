@@ -9,11 +9,11 @@ const Dashboard = () => {
     return (
         <div class="drawer drawer-mobile">
             <input id="my-dashboard-drawer" type="checkbox" class="drawer-toggle" />
-            <div class="drawer-content">
+            <div class="drawer-content bg-slate-300 p-10">
                 {/* <!-- Page content here --> */}
-                <h2 className='text-3xl font-bold'>Hello <span className='text-primary'>{user.displayName}</span>, Welcome in your Dashboard</h2>
+                {/* <h2 className='text-3xl font-bold'>Hello <span className='text-primary'>{user.displayName}</span>, Welcome in your Dashboard</h2> */}
                 <Outlet></Outlet>
-                
+
 
             </div>
             <div class="drawer-side">

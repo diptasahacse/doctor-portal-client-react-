@@ -22,7 +22,9 @@ const MyAppointment = () => {
 
     return (
         <div>
-            <h2>My Appointment : {myAppointment.length}</h2>
+            <div className='mb-5 '>
+                <h2 className='text-2xl'>My Appointment</h2>
+            </div>
 
             <div>
                 <div class="overflow-x-auto">
@@ -33,7 +35,9 @@ const MyAppointment = () => {
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Service</th>
+                                <th>Date</th>
                                 <th>Time</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -45,7 +49,7 @@ const MyAppointment = () => {
                                 <td>Blue</td>
                             </tr> */}
                             {
-                                myAppointment.map((appointment,index) => <MyAppointmentRow index={index} appointment={appointment} key={appointment._id}></MyAppointmentRow>)
+                                myAppointment.map((appointment, index) => <MyAppointmentRow index={index} appointment={appointment} key={appointment._id}></MyAppointmentRow>)
                             }
 
                         </tbody>
