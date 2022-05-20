@@ -1,19 +1,21 @@
 import React, { useEffect } from 'react';
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth'
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../shared/Loading/Loading';
 import GoogleSignIn from '../shared/GoogleSignIn/GoogleSignIn';
-
+import useToken from '../../hooks/useToken';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Login = () => {
 
     const { register, formState: { errors }, handleSubmit } = useForm();
     const navigate = useNavigate()
 
     let location = useLocation();
-    let signInError;
     let from = location.state?.from?.pathname || "/";
+
     const [
         signInWithEmailAndPassword,
         user,
@@ -21,28 +23,34 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
 
+    const [token] = useToken(user);
 
+    console.log(error)
     useEffect(() => {
-        // For email and google User
+        // For email User
         if (user) {
             // if he login with email 
             if (user.user.emailVerified) {
-                navigate(from, { replace: true });
+                if (token) {
+                    navigate(from, { replace: true });
+                }
             }
             else {
-                signInError = <p className='text-red-500 mb-4'>Email is not verified.. please verify it</p>
+                toast.error("Email is not verified.. please verify it");
+
             }
 
         }
-        
-    }, [user, from, navigate])
+        // For Error
+        if (error) {
+            toast.error(error?.message);
+        }
+
+    }, [user, from, navigate, token, error])
+
+    console.log(user)
 
 
-    // For Error
-    if (error) {
-        signInError = <p className='text-red-500 mb-4'>{error?.message}</p>
-
-    }
     // For Loading
     if (loading) {
         return <Loading></Loading>
@@ -117,9 +125,6 @@ const Login = () => {
                             <div className='mb-2'>
                                 <Link to='/resetpassword' className='link text-red-500'>Forgot Password..?</Link>
                             </div>
-                            {
-                                signInError && signInError
-                            }
                             <input className='btn w-full max-w-xs' type="submit" value='Login' />
                         </form>
                         <p className='text-center mt-2'><small>New to doctor's portal..? <Link className='text-primary' to='/register'>Register</Link> </small></p>

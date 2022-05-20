@@ -6,6 +6,7 @@ import auth from '../../../firebase.init';
 
 const Header = () => {
     const [user, loading, error] = useAuthState(auth);
+    console.log(user)
     const menuItems = <>
         <li> <Link to='/'>Home</Link> </li>
         <li> <Link to='/about'>About</Link> </li>
@@ -13,9 +14,9 @@ const Header = () => {
         <li> <Link to='/reviews'>Review</Link> </li>
         <li> <Link to='/contact'>Contact</Link> </li>
         {
-            user && <li> <Link to='/dashboard'>Dashboard</Link> </li>
+            user?.emailVerified && <li> <Link to='/dashboard'>Dashboard</Link> </li>
         }
-        <li> {user ? <button onClick={() => signOut(auth)} className="btn btn-active btn-ghost">Sign out</button> : <Link to='/login'>Login</Link>} </li>
+        <li> {user?.emailVerified ? <button onClick={() => signOut(auth)} className="btn btn-active btn-ghost">Sign out</button> : <Link to='/login'>Login</Link>} </li>
     </>
     return (
         <div className="navbar bg-base-100">

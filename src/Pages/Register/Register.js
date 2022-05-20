@@ -1,18 +1,18 @@
-import React, { useEffect } from 'react';
 import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth'
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Loading from '../shared/Loading/Loading';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import useToken from '../../hooks/useToken';
+
 import GoogleSignIn from '../shared/GoogleSignIn/GoogleSignIn';
 const Register = () => {
     // Initialize
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [sendEmailVerification, sending, verifivationError] = useSendEmailVerification(auth);
 
+    const navigate = useNavigate()
     let signUpError;
     const [
         createUserWithEmailAndPassword,
@@ -35,6 +35,10 @@ const Register = () => {
     if (loading || updating || sending) {
 
         return <Loading></Loading>
+    }
+    if (user) {
+        navigate('/login')
+
     }
     // console.log(user)
 
@@ -144,7 +148,6 @@ const Register = () => {
                     </div>
                     <div className="divider">OR</div>
                     <GoogleSignIn></GoogleSignIn>
-                    <ToastContainer />
                 </div>
             </div>
         </div>
