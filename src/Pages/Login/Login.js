@@ -25,7 +25,7 @@ const Login = () => {
 
     const [token] = useToken(user);
 
-    console.log(error)
+    // console.log(error)
     useEffect(() => {
         // For email User
         if (user) {
