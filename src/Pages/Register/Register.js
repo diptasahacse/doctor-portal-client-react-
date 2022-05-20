@@ -1,49 +1,41 @@
 import React, { useEffect } from 'react';
-import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth'
+import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth'
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../shared/Loading/Loading';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import useToken from '../../hooks/useToken';
+import GoogleSignIn from '../shared/GoogleSignIn/GoogleSignIn';
 const Register = () => {
     // Initialize
-    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [sendEmailVerification, sending, verifivationError] = useSendEmailVerification(auth);
-    const navigate = useNavigate();
-    let location = useLocation();
-    let from = location.state?.from?.pathname || "/";
+
     let signUpError;
     const [
         createUserWithEmailAndPassword,
+        user,
         loading,
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
-    useEffect(() => {
-        // For google user
-        if (gUser) {
-            navigate(from, { replace: true });
-        }
-    }, [gUser, from, navigate])
-
+    // console.log(token)
 
 
 
     // For Error
-    if (gError || error || updateError || verifivationError) {
-        signUpError = <p className='text-red-500 mb-4'>{gError?.message || error?.message || updateError?.message || verifivationError?.message}</p>
+    if (error || updateError || verifivationError) {
+        signUpError = <p className='text-red-500 mb-4'>{error?.message || updateError?.message || verifivationError?.message}</p>
 
     }
     // For Loading
-    if (gLoading || loading || updating || sending) {
+    if (loading || updating || sending) {
 
         return <Loading></Loading>
     }
-
-
     // console.log(user)
 
 
@@ -53,9 +45,6 @@ const Register = () => {
         await updateProfile({ displayName })
         await sendEmailVerification();
         toast("Verification link sent your email");
-
-
-
     };
     return (
         <div className='flex justify-center items-center h-screen'>
@@ -154,7 +143,7 @@ const Register = () => {
                         <p className='text-center mt-2'><small>Already have an account.? <Link className='text-primary' to='/login'>Login</Link> </small></p>
                     </div>
                     <div className="divider">OR</div>
-                    <button onClick={() => signInWithGoogle()} className="btn btn-outline btn-accent">Continue with google</button>
+                    <GoogleSignIn></GoogleSignIn>
                     <ToastContainer />
                 </div>
             </div>

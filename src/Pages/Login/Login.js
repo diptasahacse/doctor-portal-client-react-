@@ -4,9 +4,10 @@ import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../shared/Loading/Loading';
+import GoogleSignIn from '../shared/GoogleSignIn/GoogleSignIn';
 
 const Login = () => {
-    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+
     const { register, formState: { errors }, handleSubmit } = useForm();
     const navigate = useNavigate()
 
@@ -23,49 +24,34 @@ const Login = () => {
 
     useEffect(() => {
         // For email and google User
-        if (user || gUser) {
-            // if email is verified
-            if (user) {
-                // if he login with email 
-                if (user.user.emailVerified) {
-                    navigate(from, { replace: true });
-                }
-                else {
-                    signInError = <p className='text-red-500 mb-4'>Email is not verified.. please verify it</p>
-                }
-
+        if (user) {
+            // if he login with email 
+            if (user.user.emailVerified) {
+                navigate(from, { replace: true });
             }
             else {
-                // if he login with google 
-                navigate(from, { replace: true });
+                signInError = <p className='text-red-500 mb-4'>Email is not verified.. please verify it</p>
             }
 
         }
-    }, [user, gUser, from, navigate])
+        
+    }, [user, from, navigate])
 
 
     // For Error
-    if (gError || error) {
-        signInError = <p className='text-red-500 mb-4'>{gError?.message || error?.message}</p>
+    if (error) {
+        signInError = <p className='text-red-500 mb-4'>{error?.message}</p>
 
     }
     // For Loading
-    if (gLoading || loading) {
-
+    if (loading) {
         return <Loading></Loading>
     }
 
-
-    // console.log(gError)
-
-
-
-
     const onSubmit = data => {
         signInWithEmailAndPassword(data.email, data.password)
-
-        // console.log(data)
     };
+
     return (
         <div className='flex justify-center items-center h-screen'>
             <div className="card w-96 bg-base-100 shadow-xl">
@@ -139,7 +125,7 @@ const Login = () => {
                         <p className='text-center mt-2'><small>New to doctor's portal..? <Link className='text-primary' to='/register'>Register</Link> </small></p>
                     </div>
                     <div className="divider">OR</div>
-                    <button onClick={() => signInWithGoogle()} className="btn btn-outline btn-accent">Continue with google</button>
+                    <GoogleSignIn></GoogleSignIn>
 
                 </div>
             </div>
