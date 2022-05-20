@@ -1,12 +1,23 @@
 import { signOut } from 'firebase/auth';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
+import Loading from '../Loading/Loading';
 
 const Header = () => {
     const [user, loading, error] = useAuthState(auth);
     // console.log(user)
+    const navigate = useNavigate()
+
+
+    const logOutHandler = () => {
+        localStorage.removeItem('accessToken')
+        signOut(auth)
+        navigate('/')
+
+
+    }
     const menuItems = <>
         <li> <Link to='/'>Home</Link> </li>
         <li> <Link to='/about'>About</Link> </li>
@@ -16,8 +27,12 @@ const Header = () => {
         {
             user?.emailVerified && <li> <Link to='/dashboard'>Dashboard</Link> </li>
         }
-        <li> {user?.emailVerified ? <button onClick={() => signOut(auth)} className="btn btn-active btn-ghost">Sign out</button> : <Link to='/login'>Login</Link>} </li>
+        <li> {user?.emailVerified ? <button onClick={logOutHandler} className="btn btn-active btn-ghost">Sign out</button> : <Link to='/login'>Login</Link>} </li>
     </>
+
+    if (loading) {
+        <Loading></Loading>
+    }
     return (
         <div className="navbar bg-base-100">
             <div className="navbar-start">
