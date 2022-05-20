@@ -6,7 +6,7 @@ import auth from '../../../firebase.init';
 
 const Header = () => {
     const [user, loading, error] = useAuthState(auth);
-    console.log(user)
+    // console.log(user)
     const menuItems = <>
         <li> <Link to='/'>Home</Link> </li>
         <li> <Link to='/about'>About</Link> </li>
@@ -38,8 +38,8 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end lg:hidden">
-                <label for="my-dashboard-drawer" tabIndex="1" className="btn btn-ghost lg:hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                <label htmlFor="my-dashboard-drawer" tabIndex="1" className="btn btn-ghost lg:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </label>
             </div>
 

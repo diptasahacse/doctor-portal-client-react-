@@ -18,7 +18,7 @@ const MyAppointment = () => {
     if (loading) {
         return <Loading></Loading>
     }
-    console.log(myAppointment)
+    // console.log(myAppointment)
 
     return (
         <div>
@@ -27,8 +27,8 @@ const MyAppointment = () => {
             </div>
 
             <div>
-                <div class="overflow-x-auto">
-                    <table class="table w-full">
+                <div className="overflow-x-auto">
+                    <table className="table w-full">
                         {/* <!-- head --> */}
                         <thead>
                             <tr>

@@ -18,9 +18,9 @@ const ResetPassword = () => {
     };
     return (
         <div className='flex justify-center items-center h-screen'>
-            <div class="card w-96 bg-base-100 shadow-xl">
-                <div class="card-body">
-                    <h2 class="card-title">Reset your Password</h2>
+            <div className="card w-96 bg-base-100 shadow-xl">
+                <div className="card-body">
+                    <h2 className="card-title">Reset your Password</h2>
                     <form className='mt-4' onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-control w-full max-w-xs">
 
