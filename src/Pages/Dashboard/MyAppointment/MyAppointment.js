@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useQuery } from 'react-query';
 import auth from '../../../firebase.init';
 import Loading from '../../shared/Loading/Loading';
 import MyAppointmentRow from './MyAppointmentRow/MyAppointmentRow';
@@ -9,7 +8,12 @@ const MyAppointment = () => {
     const [user, loading] = useAuthState(auth);
     const [myAppointment, setMyAppointment] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:5000/treatmentbooking?patientEmail=${user.email}`)
+        fetch(`http://localhost:5000/treatmentbooking?patientEmail=${user.email}`, {
+            method: "GET",
+            headers: { 'authorization': `Bearer ${localStorage.getItem('accessToken')}` },
+            body: JSON.stringify()
+
+        })
             .then(res => res.json())
             .then(data => setMyAppointment(data))
 
