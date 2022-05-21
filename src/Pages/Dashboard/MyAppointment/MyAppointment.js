@@ -1,12 +1,16 @@
+import { signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import Loading from '../../shared/Loading/Loading';
 import MyAppointmentRow from './MyAppointmentRow/MyAppointmentRow';
 
+
 const MyAppointment = () => {
     const [user, loading] = useAuthState(auth);
-    const [myAppointment, setMyAppointment] = useState([])
+    const [myAppointment, setMyAppointment] = useState([]);
+    const navigate = useNavigate();
     useEffect(() => {
         fetch(`http://localhost:5000/treatmentbooking?patientEmail=${user.email}`, {
             method: "GET",
@@ -14,8 +18,22 @@ const MyAppointment = () => {
             body: JSON.stringify()
 
         })
-            .then(res => res.json())
-            .then(data => setMyAppointment(data))
+            .then(res => {
+                console.log(res)
+                if (res.status === 401 || res.status === 403) {
+
+                    // If forbidden and unauthorized token
+                    signOut(auth)
+                    localStorage.removeItem('accessToken')
+                    navigate('/')
+
+                }
+                return res.json()
+            })
+            .then(data => {
+                console.log(data)
+                setMyAppointment(data)
+            })
 
     }, [user])
 
