@@ -1,19 +1,83 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
+import { toast } from 'react-toastify';
 import Loading from '../../shared/Loading/Loading';
 
 const AddDoctor = () => {
-    const { register, formState: { errors }, handleSubmit } = useForm();
 
+    /*
+    3 way to store image
+    1. third party storage (imgbb) // free open public storage is ok for practice
+
+    2. own storage in my server // professional
+    3. database: Mongodb // professional
+    
+
+    Image / file validate
+    YAP: it is use to validate file
+    
+    */
+    const { register, formState: { errors }, handleSubmit } = useForm();
+    const imgStorageKey = '7f72d87979e17c6504f5811b2f68d7d4'
     const { data, isLoading } = useQuery('servicesname', () => fetch('http://localhost:5000/servicesname').then(res => res.json()))
+    const [infoUploadLoading, setInfoUploadLoading] = useState(false)
     const onSubmit = async (data) => {
-        console.log(data)
+        setInfoUploadLoading(true)
+        const formData = new FormData();
+        const img = data.profileImage[0];
+        formData.append('image', img)
+
+        const url = `https://api.imgbb.com/1/upload?key=${imgStorageKey}`;
+        fetch(url, {
+
+            method: "POST",
+            body: formData
+
+
+        })
+            .then(res => res.json())
+            .then(result => {
+                if (result.status) {
+                    const imgLink = result.data.url;
+                    const doctorName = data.name
+                    const doctorEmail = data.email
+                    const specialty = data.specialty;
+
+
+                    const doctorInfo = {
+                        imgLink,
+                        doctorName,
+                        doctorEmail,
+                        specialty
+
+                    }
+                    fetch('http://localhost:5000/addDoctors', {
+                        method: "POST",
+                        headers: { 'content-type': 'application/json' },
+                        body: JSON.stringify(doctorInfo)
+                    })
+                        .then(res => res.json())
+                        .then(result => {
+                            // console.log(result)
+                            toast('Doctors added Successfully')
+                            setInfoUploadLoading(false)
+                        })
+                    // console.log(doctorInfo)
+
+
+
+
+                }
+            })
 
     };
+
+
+
     // console.log(data)
 
-    if (isLoading) {
+    if (isLoading || infoUploadLoading) {
         return <Loading></Loading>
     }
     return (
@@ -23,7 +87,7 @@ const AddDoctor = () => {
             </div>
             <div className=''>
                 <form className='w-full flex flex-col justify-center items-center' onSubmit={handleSubmit(onSubmit)}>
-                    {/* Email Full Name */}
+                    {/* Full Name */}
                     <div className="form-control w-full">
                         <label className="label">
                             <span className="label-text">Doctor Name</span>
@@ -85,11 +149,11 @@ const AddDoctor = () => {
                         </label>
                         <select {...register('specialty')} class="select select-bordered w-full">
                             {
-                                data.map(serviceName => <option key={serviceName._id} value={serviceName.name}>{serviceName.name}</option> )
+                                data.map(serviceName => <option key={serviceName._id} value={serviceName.name}>{serviceName.name}</option>)
                             }
-                            
+
                         </select>
-                        
+
                     </div>
                     {/* Image Input */}
                     <div className="form-control w-full">
@@ -110,7 +174,7 @@ const AddDoctor = () => {
                         />
                         <label className="label">
                             {errors.profileImage?.type === 'required' && <span className="label-text-alt text-red-600">{errors.profileImage.message}</span>}
-                            
+
                         </label>
                     </div>
 
