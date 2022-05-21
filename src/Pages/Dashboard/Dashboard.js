@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, Outlet } from 'react-router-dom';
 import auth from '../../firebase.init';
+import useAdmin from '../../hooks/useAdmin';
+import Loading from '../shared/Loading/Loading';
 
 const Dashboard = () => {
     const [user, loading, error] = useAuthState(auth);
-    // console.log(user)
+    const [isAdmin] = useAdmin(user?.email);
+
+    if (loading) {
+        return <Loading></Loading>
+    }
+    console.log(user.email, isAdmin)
+
+    // console.log(user.email)
     return (
         <div className="drawer drawer-mobile">
             <input id="my-dashboard-drawer" type="checkbox" className="drawer-toggle" />
@@ -23,7 +32,7 @@ const Dashboard = () => {
                     <li><Link to='/dashboard'>My Appointments</Link></li>
                     <li><Link to='/dashboard/myreview'>My Review</Link></li>
                     <li><Link to='/dashboard/myhistory'>My History</Link></li>
-                    <li><Link to='/dashboard/allusers'>All Users</Link></li>
+                    {isAdmin && <li><Link to='/dashboard/allusers'>All Users</Link></li>}
 
                 </ul>
 
