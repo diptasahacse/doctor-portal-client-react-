@@ -12,7 +12,7 @@ const MyAppointment = () => {
     const [myAppointment, setMyAppointment] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
-        fetch(`http://localhost:5000/treatmentbooking?patientEmail=${user.email}`, {
+        fetch(`https://pacific-dawn-42363.herokuapp.com/treatmentbooking?patientEmail=${user.email}`, {
             method: "GET",
             headers: { 'authorization': `Bearer ${localStorage.getItem('accessToken')}` },
             body: JSON.stringify()

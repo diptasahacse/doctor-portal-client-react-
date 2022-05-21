@@ -25,7 +25,7 @@ const ServiceModal = ({ selectedTreatment, user, setSelectedTreatment, refetch }
             phone: phoneRef.current.value
         }
         // console.log(bookingObj)
-        fetch('http://localhost:5000/treatmentbooking', {
+        fetch('https://pacific-dawn-42363.herokuapp.com/treatmentbooking', {
             method: "POST",
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(bookingObj)

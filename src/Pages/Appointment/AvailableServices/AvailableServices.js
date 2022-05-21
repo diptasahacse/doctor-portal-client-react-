@@ -11,7 +11,7 @@ const AvailableServices = ({ selectedDate }) => {
     const formatedDate = format(selectedDate, 'PP');
     const [shouldUpdate, setShouldUpdate] = useState(0)
 
-    const { isLoading, error, data: services, refetch } = useQuery(['available', formatedDate, shouldUpdate], () => fetch(`http://localhost:5000/available?date=${formatedDate}`)
+    const { isLoading, error, data: services, refetch } = useQuery(['available', formatedDate, shouldUpdate], () => fetch(`https://pacific-dawn-42363.herokuapp.com/available?date=${formatedDate}`)
         .then(res => res.json()))
 
     if (isLoading) {

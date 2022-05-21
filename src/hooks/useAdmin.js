@@ -4,7 +4,7 @@ const useAdmin = (email) => {
     const [isAdmin, setIsAdmin] = useState(false);
     const [adminLoading, setAdminLoading] = useState(true);
     useEffect(() => {
-        fetch(`http://localhost:5000/admin/${email}`, {
+        fetch(`https://pacific-dawn-42363.herokuapp.com/admin/${email}`, {
             method: "GET",
             headers: { authorization: `Bearer ${localStorage.getItem('accessToken')}` }
         })
