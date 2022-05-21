@@ -4,10 +4,10 @@ import Loading from '../../shared/Loading/Loading';
 import UserRow from './UserRow/UserRow';
 
 const AllUsers = () => {
-    const { isLoading, error, data } = useQuery('user', () =>
-        fetch('http://localhost:5000/user',{
-            method:"GET",
-            headers: {authorization: `Bearer ${localStorage.getItem('accessToken')}`}
+    const { isLoading, error, data, refetch } = useQuery('user', () =>
+        fetch('http://localhost:5000/user', {
+            method: "GET",
+            headers: { authorization: `Bearer ${localStorage.getItem('accessToken')}` }
         }).then(res =>
             res.json()
         )
@@ -16,7 +16,7 @@ const AllUsers = () => {
         return <Loading></Loading>
 
     }
-    console.log(data)
+    // console.log(data)
     return (
         <div>
             <div className='mb-5 '>
@@ -26,7 +26,7 @@ const AllUsers = () => {
             <div>
                 <div className="overflow-x-auto">
                     <table className="table w-full">
-                        
+
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -37,11 +37,11 @@ const AllUsers = () => {
                         </thead>
                         <tbody>
                             {
-                                data.map((user,index) => <UserRow index={index} key={user._id} user={user}></UserRow>)
+                                data.map((user, index) => <UserRow index={index} refetch={refetch} key={user._id} user={user}></UserRow>)
                             }
-                           
-                            
-                            
+
+
+
                         </tbody>
                     </table>
                 </div>

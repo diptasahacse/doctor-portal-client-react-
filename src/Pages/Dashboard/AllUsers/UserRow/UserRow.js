@@ -1,6 +1,7 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 
-const UserRow = ({ user, index }) => {
+const UserRow = ({ user, index, refetch }) => {
     const { email } = user;
 
     const makeAdminHandler = () => {
@@ -10,7 +11,8 @@ const UserRow = ({ user, index }) => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                refetch()
+                toast(`Successfully made an admin for ${email}`)
             })
 
     }
