@@ -7,12 +7,12 @@ import Loading from '../shared/Loading/Loading';
 
 const Dashboard = () => {
     const [user, loading, error] = useAuthState(auth);
-    const [isAdmin] = useAdmin(user?.email);
+    const [isAdmin, adminLoading] = useAdmin(user?.email);
 
-    if (loading) {
+    if (loading || adminLoading) {
         return <Loading></Loading>
     }
-    console.log(user.email, isAdmin)
+    // console.log(user.email, isAdmin)
 
     // console.log(user.email)
     return (

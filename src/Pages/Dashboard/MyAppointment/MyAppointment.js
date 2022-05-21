@@ -19,7 +19,7 @@ const MyAppointment = () => {
 
         })
             .then(res => {
-                console.log(res)
+                // console.log(res)
                 if (res.status === 401 || res.status === 403) {
 
                     // If forbidden and unauthorized token
@@ -31,7 +31,7 @@ const MyAppointment = () => {
                 return res.json()
             })
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 setMyAppointment(data)
             })
 

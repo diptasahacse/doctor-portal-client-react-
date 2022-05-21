@@ -48,7 +48,7 @@ const Login = () => {
 
     }, [user, from, navigate, token, error])
 
-    console.log(user)
+    // console.log(user)
 
 
     // For Loading
