@@ -18,7 +18,7 @@ const AddDoctor = () => {
     YAP: it is use to validate file
     
     */
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const imgStorageKey = '7f72d87979e17c6504f5811b2f68d7d4'
     const { data, isLoading } = useQuery('servicesname', () => fetch('http://localhost:5000/servicesname').then(res => res.json()))
     const [infoUploadLoading, setInfoUploadLoading] = useState(false)
@@ -54,14 +54,25 @@ const AddDoctor = () => {
                     }
                     fetch('http://localhost:5000/addDoctors', {
                         method: "POST",
-                        headers: { 'content-type': 'application/json' },
+                        headers: {
+                            'content-type': 'application/json',
+                            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                        },
                         body: JSON.stringify(doctorInfo)
                     })
                         .then(res => res.json())
                         .then(result => {
                             // console.log(result)
-                            toast('Doctors added Successfully')
-                            setInfoUploadLoading(false)
+                            if (result.insertedId) {
+                                toast('Doctors added Successfully')
+                                setInfoUploadLoading(false)
+                                reset()
+
+                            }
+                            else {
+                                toast.error('Doctors added Faild')
+                            }
+
                         })
                     // console.log(doctorInfo)
 
