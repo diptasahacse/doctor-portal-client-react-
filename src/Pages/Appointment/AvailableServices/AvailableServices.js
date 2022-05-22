@@ -20,7 +20,7 @@ const AvailableServices = ({ selectedDate }) => {
     }
 
 
-
+console.log(services)
 
 
     // console.log(selectedServiceObj)
