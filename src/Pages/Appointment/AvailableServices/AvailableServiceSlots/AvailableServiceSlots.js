@@ -4,14 +4,16 @@ import auth from '../../../../firebase.init';
 import ServiceModal from '../ServiceModal/ServiceModal';
 import SlotCard from './SlotCard/SlotCard';
 
-const AvailableServiceSlots = ({ selectedServiceObj, selectedDate, refetch}) => {
+const AvailableServiceSlots = ({ selectedServiceObj, selectedDate, refetch }) => {
     const [user, loading, error] = useAuthState(auth);
-    const { _id, name, slots } = selectedServiceObj;
+    const { _id, name, slots, price } = selectedServiceObj;
+    // console.log(selectedServiceObj)
     const [selectedTreatment, setSelectedTreatment] = useState({})
     const selectServiceHandler = (name, slot) => {
-        setSelectedTreatment({ _id, name, slot, selectedDate })
+        setSelectedTreatment({ _id, name, slot, selectedDate, price })
 
     }
+    // console.log(selectedTreatment)
 
     return (
         <div className='my-20'>

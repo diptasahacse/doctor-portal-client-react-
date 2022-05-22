@@ -4,9 +4,10 @@ import { toast } from 'react-toastify';
 
 const ServiceModal = ({ selectedTreatment, user, setSelectedTreatment, refetch }) => {
     const { displayName, email } = user
-    const { _id, name, slot, selectedDate } = selectedTreatment;
+    const { _id, name, slot, selectedDate, price } = selectedTreatment;
 
     const phoneRef = useRef('')
+    // console.log(price)
 
 
     // console.log(format(selectedDate, 'pp'))
@@ -22,6 +23,7 @@ const ServiceModal = ({ selectedTreatment, user, setSelectedTreatment, refetch }
             patientEmail: email,
             slot,
             date: formatDate,
+            price: price,
             phone: phoneRef.current.value
         }
         // console.log(bookingObj)
@@ -42,7 +44,7 @@ const ServiceModal = ({ selectedTreatment, user, setSelectedTreatment, refetch }
                     toast('Appointment Successfully stored..')
                     setSelectedTreatment({})
                     refetch();
-                    
+
 
                 }
                 else {
