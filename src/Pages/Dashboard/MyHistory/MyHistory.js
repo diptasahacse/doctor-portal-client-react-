@@ -9,7 +9,7 @@ const MyHistory = () => {
     const [user, loading, error] = useAuthState(auth);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/payment/${user.email}`, {
+        fetch(`https://pacific-dawn-42363.herokuapp.com/payment/${user.email}`, {
             method: "GET",
             headers: {
                 'content-type': 'application/json',

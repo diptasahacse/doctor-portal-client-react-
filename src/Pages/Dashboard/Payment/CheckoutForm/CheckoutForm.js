@@ -26,7 +26,7 @@ const CheckoutForm = ({ appointmentInfo }) => {
 
 
     useEffect(() => {
-        fetch('http://localhost:5000/create-payment-intent', {
+        fetch('https://pacific-dawn-42363.herokuapp.com/create-payment-intent', {
             method: "POST",
             headers: {
                 'content-type': 'application/json',
@@ -111,7 +111,7 @@ const CheckoutForm = ({ appointmentInfo }) => {
                 time: format(new Date(), "Pp")
             }
 
-            fetch(`http://localhost:5000/treatmentbooking/${_id}`, {
+            fetch(`https://pacific-dawn-42363.herokuapp.com/treatmentbooking/${_id}`, {
                 method: "PATCH",
                 headers: {
                     'content-type': 'application/json',

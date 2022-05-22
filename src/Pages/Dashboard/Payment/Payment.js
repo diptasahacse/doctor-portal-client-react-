@@ -15,7 +15,7 @@ const stripePromise = loadStripe('pk_test_51L2GtBH4xRKtT9akcROYTxJculEA4djz5Nkl8
 const Payment = () => {
     const { id } = useParams();
     const { isLoading, error, data } = useQuery('repoData', () =>
-        fetch(`http://localhost:5000/treatmentbooking/${id}`, {
+        fetch(`https://pacific-dawn-42363.herokuapp.com/treatmentbooking/${id}`, {
             method: "GET",
             headers: { 'authorization': `Bearer ${localStorage.getItem('accessToken')}` }
         }).then(res =>

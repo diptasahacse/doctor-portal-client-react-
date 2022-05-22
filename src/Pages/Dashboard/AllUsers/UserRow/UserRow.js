@@ -14,9 +14,9 @@ const UserRow = ({ userData, index, refetch }) => {
         <Loading></Loading>
     }
     const removeAdminHandler = () => {
-        // http://localhost:5000/user/removeadmin/:email
+        // https://pacific-dawn-42363.herokuapp.com/user/removeadmin/:email
 
-        fetch(`http://localhost:5000/user/removeadmin/${email}`, {
+        fetch(`https://pacific-dawn-42363.herokuapp.com/user/removeadmin/${email}`, {
             method: "PUT",
             headers: { authorization: `Bearer ${localStorage.getItem('accessToken')}` }
         })
