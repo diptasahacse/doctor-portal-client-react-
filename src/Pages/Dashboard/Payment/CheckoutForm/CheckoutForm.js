@@ -18,9 +18,10 @@ const CheckoutForm = ({ appointmentInfo }) => {
     const [transactionId, setTransactionId] = useState('')
     const [isLoading, setIsLoading] = useState(false)
 
-    const { patientName, date, price, slot, treatmentName, patientEmail } = appointmentInfo;
+    const { _id, patientName, date, price, slot, treatmentName, patientEmail } = appointmentInfo;
+
     const intPrice = Number(price)
-    // console.log(appointmentInfo)
+    console.log(appointmentInfo)
 
 
     useEffect(() => {
@@ -47,7 +48,7 @@ const CheckoutForm = ({ appointmentInfo }) => {
 
 
     const handleSubmit = async (event) => {
-        setIsLoading(true)
+
         event.preventDefault();
 
         if (!stripe || !elements) {
@@ -71,6 +72,7 @@ const CheckoutForm = ({ appointmentInfo }) => {
 
 
         // Confirm card payment
+        setIsLoading(true)
         setSuccess('')
         const { paymentIntent, error: intentCardError } = await stripe.confirmCardPayment(
             clientSecret,
@@ -86,23 +88,46 @@ const CheckoutForm = ({ appointmentInfo }) => {
         );
         if (intentCardError) {
             setIsLoading(false)
+
             setCardError(intentCardError.message)
 
         }
         else {
-            setIsLoading(false)
+
             setCardError('')
             console.log(paymentIntent)
             setTransactionId(paymentIntent.id)
             setSuccess('Your payment is completed')
+
+            // store payment on database
+            const payment = {
+                appointmentId: _id,
+                transactionId: paymentIntent.id,
+                patientEmail
+            }
+
+            fetch(`http://localhost:5000/treatmentbooking/${_id}`, {
+                method: "PATCH",
+                headers: {
+                    'content-type': 'application/json',
+                    'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                },
+                body: JSON.stringify(payment)
+
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    setIsLoading(false)
+                })
         }
 
 
 
     }
-    // if (isLoading) {
-    //     return <Loading></Loading>
-    // }
+    if (isLoading) {
+        return <Loading></Loading>
+    }
     // console.log(cardError)
     return (
         <>
