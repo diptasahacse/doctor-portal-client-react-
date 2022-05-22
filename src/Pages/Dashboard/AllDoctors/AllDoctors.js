@@ -16,7 +16,7 @@ const AllDoctors = () => {
         )
     )
 
-    console.log(data)
+    // console.log(data)
 
 
     if (isLoading) {

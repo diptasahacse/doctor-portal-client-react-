@@ -5,7 +5,8 @@ const DoctorsTableRow = ({ doctor, index, refetch }) => {
     const { _id, doctorEmail, doctorName, imgLink, specialty } = doctor;
     const doctorRemoveHandler = (id) => {
         fetch(`http://localhost:5000/alldoctors/${id}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: { authorization: `Bearer ${localStorage.getItem('accessToken')}` }
         })
             .then(res => res.json())
             .then(data => {
@@ -23,8 +24,8 @@ const DoctorsTableRow = ({ doctor, index, refetch }) => {
             <th>{index + 1}</th>
             <td>
                 <div class="avatar">
-                    <div class="w-14 rounded-full">
-                        <img src={imgLink} />
+                    <div class="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                        <img src={imgLink} alt='' />
                     </div>
                 </div>
             </td>
