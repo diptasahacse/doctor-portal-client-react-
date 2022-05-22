@@ -20,7 +20,7 @@ const AddDoctor = () => {
     */
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const imgStorageKey = '7f72d87979e17c6504f5811b2f68d7d4'
-    const { data, isLoading } = useQuery('servicesname', () => fetch('http://localhost:5000/servicesname').then(res => res.json()))
+    const { data, isLoading } = useQuery('servicesname', () => fetch('https://pacific-dawn-42363.herokuapp.com/servicesname').then(res => res.json()))
     const [infoUploadLoading, setInfoUploadLoading] = useState(false)
     const onSubmit = async (data) => {
         setInfoUploadLoading(true)
@@ -52,7 +52,7 @@ const AddDoctor = () => {
                         specialty
 
                     }
-                    fetch('http://localhost:5000/addDoctors', {
+                    fetch('https://pacific-dawn-42363.herokuapp.com/addDoctors', {
                         method: "POST",
                         headers: {
                             'content-type': 'application/json',
@@ -158,7 +158,7 @@ const AddDoctor = () => {
                         <label className="label">
                             <span className="label-text">Specialization </span>
                         </label>
-                        <select {...register('specialty')} class="select select-bordered w-full">
+                        <select {...register('specialty')} className="select select-bordered w-full">
                             {
                                 data.map(serviceName => <option key={serviceName._id} value={serviceName.name}>{serviceName.name}</option>)
                             }

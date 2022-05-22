@@ -4,11 +4,11 @@ import Loading from '../../shared/Loading/Loading';
 import DoctorsTableRow from './DoctorsTableRow/DoctorsTableRow';
 
 const AllDoctors = () => {
-    // http://localhost:5000/alldoctors
+    // https://pacific-dawn-42363.herokuapp.com/alldoctors
 
 
     const { isLoading, error, data, refetch } = useQuery('repoData', () =>
-        fetch('http://localhost:5000/alldoctors', {
+        fetch('https://pacific-dawn-42363.herokuapp.com/alldoctors', {
             method: "GET",
             headers: { authorization: `Bearer ${localStorage.getItem('accessToken')}` }
         }).then(res =>
@@ -30,8 +30,8 @@ const AllDoctors = () => {
                 <h2 className='text-2xl'>All Doctors</h2>
             </div>
             <div>
-                <div class="overflow-x-auto">
-                    <table class="table w-full">
+                <div className="overflow-x-auto">
+                    <table className="table w-full">
 
                         <thead>
                             <tr>
