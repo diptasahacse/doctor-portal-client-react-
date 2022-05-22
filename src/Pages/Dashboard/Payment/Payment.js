@@ -27,7 +27,7 @@ const Payment = () => {
         return <Loading></Loading>
     }
 
-    console.log(data)
+    // console.log(data)
 
     const { patientName, date, price, slot, treatmentName } = data;
     return (
@@ -52,7 +52,7 @@ const Payment = () => {
                     <div class="card bg-base-100 shadow-xl">
                         <div class="card-body">
                             <Elements stripe={stripePromise}>
-                                <CheckoutForm />
+                                <CheckoutForm price={price} />
                             </Elements>
 
                         </div>
