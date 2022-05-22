@@ -6,14 +6,22 @@ import {
     useElements,
 } from '@stripe/react-stripe-js';
 import { async } from '@firebase/util';
+import Loading from '../../../shared/Loading/Loading';
 
 
-const CheckoutForm = ({ price }) => {
+const CheckoutForm = ({ appointmentInfo }) => {
     const stripe = useStripe();
     const elements = useElements();
     const [cardError, setCardError] = useState('')
-    const [clientSecret, setClientSecret] = useState('')
+    const [clientSecret, setClientSecret] = useState('');
+    const [success, setSuccess] = useState('')
+    const [transactionId, setTransactionId] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
+
+    const { patientName, date, price, slot, treatmentName, patientEmail } = appointmentInfo;
     const intPrice = Number(price)
+    // console.log(appointmentInfo)
+
 
     useEffect(() => {
         fetch('http://localhost:5000/create-payment-intent', {
@@ -28,7 +36,7 @@ const CheckoutForm = ({ price }) => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 if (data?.clientSecret) {
                     setClientSecret(data.clientSecret)
 
@@ -39,6 +47,7 @@ const CheckoutForm = ({ price }) => {
 
 
     const handleSubmit = async (event) => {
+        setIsLoading(true)
         event.preventDefault();
 
         if (!stripe || !elements) {
@@ -61,8 +70,39 @@ const CheckoutForm = ({ price }) => {
         setCardError(error ? error.message : '')
 
 
+        // Confirm card payment
+        setSuccess('')
+        const { paymentIntent, error: intentCardError } = await stripe.confirmCardPayment(
+            clientSecret,
+            {
+                payment_method: {
+                    card: card,
+                    billing_details: {
+                        name: patientName,
+                        email: patientEmail
+                    },
+                },
+            },
+        );
+        if (intentCardError) {
+            setIsLoading(false)
+            setCardError(intentCardError.message)
+
+        }
+        else {
+            setIsLoading(false)
+            setCardError('')
+            console.log(paymentIntent)
+            setTransactionId(paymentIntent.id)
+            setSuccess('Your payment is completed')
+        }
+
+
 
     }
+    // if (isLoading) {
+    //     return <Loading></Loading>
+    // }
     // console.log(cardError)
     return (
         <>
@@ -90,6 +130,8 @@ const CheckoutForm = ({ price }) => {
                 </div>
             </form>
             {cardError && <p className='text-red-500'>{cardError}</p>}
+            {success && <p className='text-green-500'>{success}</p>}
+            {transactionId && <p className='text-green-500'>Your Transaction id: {transactionId}</p>}
         </>
     );
 };
