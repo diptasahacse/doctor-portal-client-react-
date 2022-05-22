@@ -66,6 +66,7 @@ const ServiceModal = ({ selectedTreatment, user, setSelectedTreatment, refetch }
 
                         <input type="text" disabled value={format(selectedDate, 'PP')} className="input my-2 input-bordered input-sm  w-full" />
                         <input type="text" disabled value={slot} className="input my-2 input-sm input-bordered w-full " />
+                        <input type="text" disabled value={"Price: $"+price} className="input my-2 input-sm input-bordered w-full " />
                         <input type="text" disabled value={displayName} className="input my-2 input-sm input-bordered w-full " />
                         <input type="email" disabled value={email} className="input my-2 input-sm input-bordered w-full " />
                         <input type="tel" ref={phoneRef} required placeholder='Phone' className="input my-2 input-sm input-bordered w-full " />

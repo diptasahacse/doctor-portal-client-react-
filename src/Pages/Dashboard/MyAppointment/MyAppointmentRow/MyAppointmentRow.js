@@ -1,7 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const MyAppointmentRow = ({ appointment, index }) => {
-    const { patientName, treatmentName, slot, date } = appointment;
+    console.log(appointment)
+    const { _id, patientName, treatmentName, slot, date } = appointment;
     return (
         <tr>
             <th>{index + 1}</th>
@@ -9,7 +11,8 @@ const MyAppointmentRow = ({ appointment, index }) => {
             <td>{treatmentName}</td>
             <td>{date}</td>
             <td>{slot}</td>
-            
+            <td><Link to={`/dashboard/payment/${_id}`} className='btn btn-xs btn-success'>Pay</Link></td>
+
         </tr>
     );
 };

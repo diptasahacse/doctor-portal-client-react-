@@ -59,6 +59,7 @@ const MyAppointment = () => {
                                 <th>Service</th>
                                 <th>Date</th>
                                 <th>Time</th>
+                                <th>Payment</th>
 
                             </tr>
                         </thead>

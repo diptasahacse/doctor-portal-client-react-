@@ -22,6 +22,7 @@ import AllUsers from './Pages/Dashboard/AllUsers/AllUsers';
 import RequireAdmin from './Pages/shared/RequireAdmin/RequireAdmin';
 import AddDoctor from './Pages/Dashboard/AddDoctor/AddDoctor';
 import AllDoctors from './Pages/Dashboard/AllDoctors/AllDoctors';
+import Payment from './Pages/Dashboard/Payment/Payment';
 function App() {
   return (
     <div className='max-w-7xl mx-auto'>
@@ -44,6 +45,7 @@ function App() {
           <Route index element={<MyAppointment></MyAppointment>}></Route>
           <Route path='myreview' element={<MyReview></MyReview>}></Route>
           <Route path='myhistory' element={<MyHistory></MyHistory>}></Route>
+          <Route path='payment/:id' element={<Payment></Payment>}></Route>
           <Route path='allusers' element={
             <RequireAdmin>
               <AllUsers></AllUsers>
