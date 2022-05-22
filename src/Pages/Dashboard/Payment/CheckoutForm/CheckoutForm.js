@@ -7,6 +7,7 @@ import {
 } from '@stripe/react-stripe-js';
 import { async } from '@firebase/util';
 import Loading from '../../../shared/Loading/Loading';
+import { format } from 'date-fns';
 
 
 const CheckoutForm = ({ appointmentInfo }) => {
@@ -45,6 +46,7 @@ const CheckoutForm = ({ appointmentInfo }) => {
             })
 
     }, [intPrice])
+
 
 
     const handleSubmit = async (event) => {
@@ -103,7 +105,10 @@ const CheckoutForm = ({ appointmentInfo }) => {
             const payment = {
                 appointmentId: _id,
                 transactionId: paymentIntent.id,
-                patientEmail
+                patientEmail,
+                treatmentName,
+                price,
+                time: format(new Date(), "Pp")
             }
 
             fetch(`http://localhost:5000/treatmentbooking/${_id}`, {

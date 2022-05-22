@@ -11,7 +11,7 @@ const MyAppointmentRow = ({ appointment, index }) => {
             <td>{treatmentName}</td>
             <td>{date}</td>
             <td>{slot}</td>
-            <td><Link to={`/dashboard/payment/${_id}`} className='btn btn-xs btn-success'>Pay</Link></td>
+            <td>{appointment?.paid ? <span className='text-success'>Paid</span> : <Link to={`/dashboard/payment/${_id}`} className='btn btn-xs btn-success'>Pay</Link>}</td>
 
         </tr>
     );
